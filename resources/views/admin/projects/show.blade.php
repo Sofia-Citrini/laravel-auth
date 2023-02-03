@@ -4,7 +4,7 @@
 
 <div class="card flex-row my-5">
     <div style="width: 37rem">
-        <img src="{{$project->image}}" class="card-img-top img-fluid" >
+        <img src="{{asset('storage/' . $project->image)}}" class="card-img-top img-fluid" >
     </div>
     
     <div class="card-body">

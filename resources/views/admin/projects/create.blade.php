@@ -5,7 +5,7 @@
 
     <div class="row justify-content-center my-3">
         <div class="col-7">
-            <form action="{{route('admin.projects.store')}}" method="POST">
+            <form action="{{route('admin.projects.store')}}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="mb-3">
@@ -33,8 +33,7 @@
 
                 <div class="mb-3">
                     <label class="form-label">Immagine</label>
-                    <input type="text" class="form-control @error('image') is-invalid @elseif(old('image')) is-valid @enderror" name="image" 
-                    placeholder="Inserire un link" value="{{$errors->has('image') ? '' : old('image')}}">
+                    <input type="file" class="form-control @error('image') is-invalid @elseif(old('image')) is-valid @enderror" name="image">
 
                     @error('image')
                         <div class="invalid-feedback">

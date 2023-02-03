@@ -26,7 +26,7 @@ class StoreProjectRequest extends FormRequest
         return [
             'title' => 'required',
             'description' => 'required|string',
-            'image' => 'required|url',
+            'image' => 'required|image',
             'link_github' => 'url'
         ];
     }

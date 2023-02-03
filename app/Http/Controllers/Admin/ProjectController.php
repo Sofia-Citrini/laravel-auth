@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -44,9 +45,14 @@ class ProjectController extends Controller
     {
         $data = $request->validated();
 
+        if (key_exists("image", $data)){
+            $img_path = Storage::put('projects', $data['image']);
+        };
+
         $project = Project::create([
             ...$data,
-            'user_id'=> Auth::id()
+            'user_id'=> Auth::id(),
+            "image" => $img_path ?? '',
         ]);
 
         return redirect()->route('admin.projects.show', $project->id);
@@ -84,10 +90,19 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, $id)
     {
+        $project = Project::findOrFail($id);
         $data = $request->validated();
 
-        $project = Project::findOrFail($id);
-        $project->update($data);
+        if (key_exists("image", $data)){
+            $img_path = Storage::put('projects', $data['image']);
+
+            Storage::delete($project->image);
+        };
+
+        $project->update([
+            ...$data,
+            "image" => $img_path ?? $project->image
+        ]);
 
         return redirect()->route('admin.projects.show', $project->id);
     }
@@ -100,6 +115,10 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        if ($project->image) {
+            Storage::delete($project->image);
+        }
+        
         $project->delete();
 
         return redirect()->route('admin.projects.index');

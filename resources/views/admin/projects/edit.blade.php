@@ -5,7 +5,7 @@
 
     <div class="row justify-content-center my-3">
         <div class="col-7">
-            <form action="{{route('admin.projects.update', $project->id)}}" method="POST">
+            <form action="{{route('admin.projects.update', $project->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 @method('put')
@@ -37,14 +37,17 @@
 
                 <div class="mb-3">
                     <label class="form-label">Immagine</label>
-                    <input type="text" class="form-control @error('image') is-invalid @elseif(old('image')) is-valid @enderror" name="image" 
-                    placeholder="Inserire link" value="{{old('image', $project->image)}}">
+                    <input type="file" class="form-control @error('image') is-invalid @elseif(old('image')) is-valid @enderror" name="image">
 
                     @error('image')
                         <div class="invalid-feedback">
                             {{$message}}
                         </div>
                     @enderror
+
+                    <div>
+                        <img class="img-thumbnail rounded float-start" src="{{asset('storage/' . $project->image)}}" alt="">
+                    </div>
                 </div>
 
 
