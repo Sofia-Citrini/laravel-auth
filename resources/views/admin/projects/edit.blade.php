@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="text-center py-3">Modifica Progetto</h3>
+    <h3 class="text-center pt-5">Modifica Progetto</h3>
 
     <div class="row justify-content-center my-3">
         <div class="col-7">
@@ -45,8 +45,8 @@
                         </div>
                     @enderror
 
-                    <div>
-                        <img class="img-thumbnail rounded float-start" src="{{asset('storage/' . $project->image)}}" alt="">
+                    <div class="mt-3">
+                        <img class="img-thumbnail" src="{{asset('storage/' . $project->image)}}" alt="">
                     </div>
                 </div>
 
@@ -64,6 +64,7 @@
                 </div>
 
                 <button class="btn btn-primary" type="submit">Salva modifica</button>
+                <a href="{{route('admin.projects.show', $project->id)}}" class="btn btn-outline-secondary">Annulla</a>
             </form>
         </div>
     </div>

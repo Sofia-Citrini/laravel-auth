@@ -2,9 +2,9 @@
 
 @section('content')
 
-<h3 class="text-center py-3">Tutti i progetti</h3>
+<h3 class="text-center pt-5 pb-4">Tutti i progetti</h3>
 
-<a href="{{route('admin.projects.create')}}" class="btn btn-primary my-4">Aggiungi proogetto</a>
+<a href="{{route('admin.projects.create')}}" class="btn btn-danger mb-5">+ Aggiungi proogetto</a>
 
 <table class="table table-striped">
     <thead>
@@ -22,8 +22,8 @@
             <tr>
                 <td><a href="{{route('admin.projects.show', $project->id)}}">{{$project->title}}</a></td>
                 <td>{{Str::limit($project->description, 60)}}</td>
-                <td>{{Str::limit($project->image, 50)}}</td>
-                <td>{{$project->link_github}}</td>
+                <td><img src="{{asset('storage/' . $project->image)}}" style="width:50px" alt=""></td>
+                <td><a href="">{{$project->link_github}}</a></td>
                 <td><a href="{{route('admin.projects.edit', $project->id)}}" class="text-decoration-none btn btn-outline-dark">&#10002;</a></td>
                 <td>
                     <form action="{{route('admin.projects.destroy', $project->id)}}" method="POST" class="d-inline-block">

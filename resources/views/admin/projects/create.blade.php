@@ -55,6 +55,7 @@
                 </div>
 
                 <button class="btn btn-primary" type="submit">Salva Progetto</button>
+                <a href="{{route('admin.projects.index')}}" class="btn btn-outline-secondary">Annulla</a>
             </form>
         </div>
     </div>
