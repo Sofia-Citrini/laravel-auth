@@ -4,7 +4,7 @@
 
 <h3 class="text-center pt-5 pb-4">Tutti i progetti</h3>
 
-<a href="{{route('admin.projects.create')}}" class="btn btn-danger mb-5">+ Aggiungi proogetto</a>
+<a href="{{route('admin.projects.create')}}" class="btn btn-danger mb-5">+ Aggiungi progetto</a>
 
 <table class="table table-striped">
     <thead>
@@ -26,7 +26,7 @@
                 <td><a href="">{{$project->link_github}}</a></td>
                 <td><a href="{{route('admin.projects.edit', $project->id)}}" class="text-decoration-none btn btn-outline-dark">&#10002;</a></td>
                 <td>
-                    <form action="{{route('admin.projects.destroy', $project->id)}}" method="POST" class="d-inline-block">
+                    <form action="{{route('admin.projects.destroy', $project->id)}}" method="POST" class="d-inline-block delete-form">
                       @csrf
           
                       @method('delete')
@@ -38,5 +38,21 @@
         @endforeach
       </tbody>
 </table>
+
+<script>
+  const formDelete = document.querySelectorAll(".delete-form");
+  formDelete.forEach((form) => {
+    
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const conferma = confirm("Vuoi cancellare questo progetto?");
+      
+      if (conferma === true) {
+        form.submit();
+      }
+    })
+  })
+</script>
 
 @endsection
